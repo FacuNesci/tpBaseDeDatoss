@@ -1,0 +1,85 @@
+SET SEARCH_PATH = Zapateria;
+
+INSERT INTO diaSemana (dia) VALUES
+    ('Lunes'), ('Martes'), ('Miercoles'), ('Jueves'),
+    ('Viernes'), ('Sabado'), ('Domingo');
+
+INSERT INTO persona (DNI, apellido, nombre, direccion) VALUES
+    (30111222, 'Gomez',     'Lucia',   'Belgrano 450'),
+    (31222333, 'Fernandez', 'Martin',  'Sarmiento 1020'),
+    (32333444, 'Rodriguez', 'Sofia',   'Alvear 77'),
+    (27888999, 'Alvarez',   'Roberto', 'Av. Espana 1500'),
+    (24777888, 'Torres',    'Marta',   'Bv. Bs. As. 640'),
+    (28123456, 'Ramirez',   'Pablo',   'Lavalle 150'),
+    (29234567, 'Suarez',    'Valeria', 'Rivadavia 980');
+
+INSERT INTO cliente (DNI) VALUES
+    (30111222),
+    (31222333),
+    (32333444),
+    (27888999),
+    (24777888);
+
+INSERT INTO minorista (DNI, fecha_nacimiento) VALUES
+    (30111222, '1992-04-15'),
+    (31222333, '1989-11-02'),
+    (32333444, '1995-07-23');
+
+INSERT INTO mayorista (DNI, descuento) VALUES
+    (27888999, 15.00),
+    (24777888, 10.00);
+
+INSERT INTO vendedor (DNI, nro_vendedor) VALUES
+    (28123456, 1),
+    (29234567, 2);
+
+INSERT INTO horario (DNI_V, dia, horario_entrada, horario_salida) VALUES
+    (28123456, 'Lunes',     '08:00', '16:00'),
+    (28123456, 'Martes',    '08:00', '16:00'),
+    (28123456, 'Miercoles', '08:00', '16:00'),
+    (29234567, 'Lunes',     '14:00', '21:00'),
+    (29234567, 'Martes',    '14:00', '21:00'),
+    (29234567, 'Miercoles', '14:00', '21:00');
+
+INSERT INTO franco (nro_franco, fecha, observaciones, DNI_V) VALUES
+    (1, '2025-12-24', 'Franco compensatorio', 28123456),
+    (2, '2026-01-12', 'Tramite personal',     29234567);
+
+INSERT INTO proveedor (cuit, telefonoFijo, direccion, razonSocial) VALUES
+    (30711234500, 4567890, 'Av. Colon 1250, Cordoba',   'Calzados del Sur S.R.L.'),
+    (30698765400, 4621234, 'Ruta 8 km 603, Rio Cuarto', 'Distribuidora Cuyo S.A.');
+
+INSERT INTO mcelular (cuit, celulares) VALUES
+    (30711234500, 351555100),
+    (30711234500, 351555101),
+    (30698765400, 358455102);
+
+INSERT INTO zapato (modelo, color, precio) VALUES
+    ('Runner Pro',    'Negro',  85000),
+    ('Urban Classic', 'Marron', 62000),
+    ('Trail Max',     'Gris',  110000);
+
+INSERT INTO talle (nro)
+SELECT generate_series(38, 42);
+
+INSERT INTO tiene (modelo, color, nro) VALUES
+    ('Runner Pro',    'Negro',  40),
+    ('Runner Pro',    'Negro',  41),
+    ('Urban Classic', 'Marron', 41),
+    ('Urban Classic', 'Marron', 42),
+    ('Trail Max',     'Gris',   42);
+
+INSERT INTO contiene (modelo, color, cuit) VALUES
+    ('Runner Pro',    'Negro',  30711234500),
+    ('Urban Classic', 'Marron', 30698765400),
+    ('Trail Max',     'Gris',   30698765400);
+
+INSERT INTO venta (nro_factura, fecha, monto, DNI_C, DNI_V, nro_vendedor, porcentajeDescuento) VALUES
+    (1001, '2025-02-14',  80000, 30111222, 28123456, 1,  0),
+    (1002, '2025-03-08',  98600, 27888999, 29234567, 2, 15),
+    (1003, '2025-04-19', 105000, 31222333, 28123456, 1,  0);
+
+INSERT INTO posee (nro, modelo, color, nro_factura, cantidad, precio_venta) VALUES
+    (40, 'Runner Pro',    'Negro',  1001, 1,  80000),
+    (41, 'Urban Classic', 'Marron', 1002, 2,  58000),
+    (42, 'Trail Max',     'Gris',   1003, 1, 105000);
